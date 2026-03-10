@@ -137,3 +137,37 @@ export const signOut = async (req, res) => {
     })
   }
 }
+
+// tao accessToken moi refreshToken
+export const refreshToken = async (req, res) => {
+  try {
+    // lay token tu cookie 
+    const token = req.cookies?.refreshToken
+    if (!token){
+      return res.status(401).json({message: "Refresh token not exist"})
+    }
+
+    // comare with refresh token in db
+    const session = await Session.findOne({refreshToken: token})
+
+    if (!session) {
+      return res.status(403).json({message: "Token khong hop le hoac da het han"})
+    }
+
+    // kiem tra het han chua
+    if (session.expiredAt < new Date()) {
+      return res.status(403).json({message: "Token da het han"})
+    }
+
+    // tao moi access token
+    const accessToken = jwt.sign({
+      userId: session.userId
+    }, process.env.ACCESS_TOKEN_SECRET, {expiresIn: ACCESS_TOKEN_TTL})
+
+    // return
+    return res.status(200).json({ accessToken })
+  } catch (error) {
+    console.log("Loi khi refresh token: ", error)
+    return res.status(500).json({ message: "Internal server error" })
+  }
+}
