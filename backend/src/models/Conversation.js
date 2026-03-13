@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const participantSchema = new mongoose({
+const participantSchema = new mongoose.Schema({
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
@@ -14,7 +14,7 @@ const participantSchema = new mongoose({
   _id: false
 })
 
-const groupSchema = new mongoose({
+const groupSchema = new mongoose.Schema({
   name: {
     type: String,
     trim: true
@@ -27,7 +27,7 @@ const groupSchema = new mongoose({
   _id: false
 })
 
-const lastMessageSchema = new mongoose({
+const lastMessageSchema = new mongoose.Schema({
   _id: { type: String },
   content: {
     type: String,
@@ -45,7 +45,7 @@ const lastMessageSchema = new mongoose({
   _id: false
 })
 
-const conversationSchema = new mongoose({
+const conversationSchema = new mongoose.Schema({
   type: {
     type: String,
     enum: ['direct', 'group'],
@@ -71,7 +71,7 @@ const conversationSchema = new mongoose({
     type: lastMessageSchema,
     default: null
   },
-  unreadCount: {
+  unreadCounts: {
     type: Map,
     of: Number,
     default: {}
@@ -85,7 +85,7 @@ conversationSchema.index({
   lastMessageAt: -1
 })
 
-const Conversation = mongoose.Model("Conversation", conversationSchema)
+const Conversation = mongoose.model("Conversation", conversationSchema)
 
 export default Conversation;
 

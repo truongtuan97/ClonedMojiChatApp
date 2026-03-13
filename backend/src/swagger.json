@@ -1,0 +1,344 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "ClonedMoji",
+    "version": "1.0.0",
+    "description": ""
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5001/api"
+    },
+    {
+      "url": ""
+    }
+  ],
+  "paths": {
+    "/auth/signup": {
+      "post": {
+        "summary": "SignUp",
+        "responses": {},
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string",
+                    "format": "color"
+                  },
+                  "email": {
+                    "type": "string",
+                    "format": "email"
+                  },
+                  "firstname": {
+                    "type": "string"
+                  },
+                  "lastname": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "username": "tuantruong1",
+                "password": "123456",
+                "email": "truongtuan971@yahoo.com",
+                "firstname": "Ngoc Tuan",
+                "lastname": "Truong1"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/signin": {
+      "post": {
+        "summary": "SignIn",
+        "description": "Login voi username va password. Tra ve access token trong response va refresh token trong cookie.",
+        "tags": ["Authentication"],
+        "responses": {
+          "200": { "description": "Success" },
+          "400": { "description": "Invalid Input" },
+          "401": { "description": "Unauthorized" },
+          "500": { "description": "Internal server error" }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string",
+                    "format": "color"
+                  }
+                },
+                "required": ["username", "password"]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/signout": {
+      "post": {
+        "summary": "SignOut",
+        "tags": ["Authentication"],
+        "responses": {
+          "204": { "description": "Success" },
+          "500": { "description": "Internal server error" }
+        } 
+      }
+    },
+    "/users/me": {
+      "get": {
+        "summary": "users",
+        "responses": {},
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/friends/requests": {
+      "post": {
+        "summary": "SendFriendRequest",
+        "responses": {},
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "to": {
+                    "type": "string"
+                  },
+                  "message": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "to": "69a93b0582861454ce93cd19",
+                "message": "Hello user01, ket ban voi toi nhe"
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "GetAllRequests",
+        "responses": {},
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/friends/requests/69afc5830eee969f16cdf6de/accept": {
+      "post": {
+        "summary": "AcceptFriendRequest",
+        "responses": {},
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/friends/requests/69afc64d0eee969f16cdf6f0/decline": {
+      "post": {
+        "summary": "DeclineFriendRequest",
+        "responses": {},
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "to": {
+                    "type": "string"
+                  },
+                  "message": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "to": "69a93b0582861454ce93cd19",
+                "message": "Hello user01, ket ban voi toi nhe"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/friends": {
+      "get": {
+        "summary": "GetAllFriends",
+        "responses": {},
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/messages/direct": {
+      "post": {
+        "summary": "SendDirectMessage",
+        "responses": {},
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "recipientId": {
+                    "type": "string"
+                  },
+                  "content": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "recipientId": "69a93b0582861454ce93cd19",
+                "content": "Gui tin nhan toi nguoi da tung quen"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/conversations": {
+      "post": {
+        "summary": "SendGroupMessage",
+        "responses": {},
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "memberIds": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "example": {
+                "type": "group",
+                "name": "Group ABC",
+                "memberIds": [
+                  "69a93b0582861454ce93cd19"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/conversations/": {
+      "post": {
+        "summary": "GetConversations",
+        "responses": {},
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "memberIds": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "example": {
+                "type": "group",
+                "name": "Group ABC",
+                "memberIds": [
+                  "69a93b0582861454ce93cd19"
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "security": [
+    {
+      "BearerAuth": []
+    }
+  ]
+}

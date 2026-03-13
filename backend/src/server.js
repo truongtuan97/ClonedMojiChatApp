@@ -13,6 +13,9 @@ import {
 } from './middlewares/authMiddleware.js'
 import friendRoute from './routes/friendRoute.js'
 import messageRoute from './routes/messageRoute.js'
+import conversationRoute from './routes/conversationRoute.js'
+import swaggerUI from 'swagger-ui-express';
+import fs from 'fs';
 
 dotenv.config();
 
@@ -26,6 +29,11 @@ app.use(cors({
   origin: process.env.CLIENT_URL,
   credentials: true
 }))
+
+const swaggerDocument = JSON.parse(fs.readFileSync('./src/swagger.json', 'utf8'));
+
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
+
 // public routes
 app.use('/api/auth', authRoute)
 
@@ -34,6 +42,7 @@ app.use(protectedRoute);
 app.use('/api/users', userRoute);
 app.use('/api/friends', friendRoute);
 app.use('/api/messages', messageRoute);
+app.use('/api/conversations', conversationRoute);
 
 connectDB().then(() => {
   app.listen(PORT, () => {

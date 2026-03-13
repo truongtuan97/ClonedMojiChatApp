@@ -38,7 +38,34 @@ export const sendDirectMessage = async (req, res) => {
 
         await conversation.save();
         return res.status(201).json({message});
-    } catch (error) {}
+    } catch (error) {
+      console.log("Loi xay ra khi gui tin nhan truc tiep: ", error);
+      return res.status(500).json({message: "Internal server error"});
+    }
 };
 
-export const sendGroupMessage = async (req, res) => {};
+export const sendGroupMessage = async (req, res) => {
+  try {
+    const { conversationId, content } = req.body;
+    const senderId = req.user._id;
+    const conversation = req.conversation;
+
+    if (!content) {
+      return res.status(400).json({message: "Thieu noi dung."})
+    }
+
+    const message = await Message.create({
+      conversationId, senderId, content
+    });
+
+    updateConversationAfterCreateMessage(conversation, message, senderId);
+
+    await conversation.save();
+
+    return res.status(200).json({message});
+
+  } catch (error) {
+    console.error("Loi khi gui group message: ", error);
+    return res.status(500).json({message: "Internal server error"});
+  }
+};
