@@ -44,6 +44,8 @@ export const useAuthStore = create < AuthState > ()(persist((set, get) => ({
             get().setAccessToken(accessToken);
             await get().fetchMe();
 
+            useChatStore.getState().fetchConversations();
+            
             toast.success('Chào mừng bạn quay lại với Mọi')
         } catch (error) {
             console.log(error)

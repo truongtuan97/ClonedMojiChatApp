@@ -286,7 +286,7 @@
       }
     },
     "/conversations/": {
-      "post": {
+      "get": {
         "summary": "GetConversations",
         "responses": {},
         "security": [

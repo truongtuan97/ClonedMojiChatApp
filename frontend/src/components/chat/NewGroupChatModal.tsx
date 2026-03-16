@@ -1,7 +1,7 @@
 import React from 'react';
 
 const NewGroupChatModal = () => {
-  return <div>New Group Chat Modal</div>
+  return <div>NewGroupChatModal</div>
 };
 
 export default NewGroupChatModal;

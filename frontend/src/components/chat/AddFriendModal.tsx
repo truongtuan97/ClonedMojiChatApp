@@ -1,7 +1,7 @@
 import React from 'react';
 
 const AddFriendModal = () => {
-  return <div>Add friend modal</div>
+  return <div>AddFriendModal</div>
 };
 
 export default AddFriendModal;

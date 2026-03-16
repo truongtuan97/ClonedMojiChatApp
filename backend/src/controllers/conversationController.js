@@ -88,7 +88,7 @@ export const getConversations = async (req, res) => {
       lastMessageAt: -1, updatedAt: -1
     }).populate({ path: "participants.userId", select: "displayName avatarUrl"}).
     populate({ path: "lastMessage.senderId", select: "displayName avatarUrl" }).
-    populate({ path: "seendBy", select: "displayName avatarUrl"})
+    populate({ path: "seenBy", select: "displayName avatarUrl"})
 
     const formatted = conversations.map((conver) => {
       const participants = (conver.participants || []).map((p) => ({
