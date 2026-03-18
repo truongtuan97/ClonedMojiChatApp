@@ -1,4 +1,3 @@
-import React from 'react';
 import { useChatStore } from '@/stores/useChatStore';
 import GroupChatCard from './GroupChatCard';
 

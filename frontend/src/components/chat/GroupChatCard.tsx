@@ -1,7 +1,6 @@
 import { useAuthStore } from '@/stores/useAuthStore';
 import { useChatStore } from '@/stores/useChatStore';
 import type { Conversation } from '@/types/chat';
-import React from 'react';
 import ChatCard from './ChatCard';
 import UnreadCountBadge from './UnreadCountBadge';
 import GroupChatAvatar from './GroupChatAvatar';
@@ -16,7 +15,7 @@ const GroupChatCard = ({convo}: {convo: Conversation}) => {
   const name = convo.group?.name ?? "";
   const handleSelectConversation = async (id: string) => {
     setActiveConversation(id);
-    if (!messages) {
+    if (!messages[id]) {
       await fetchMessages();
     }
   };
