@@ -66,7 +66,7 @@ export function SignInForm({
                                 Tên đăng nhập
                             </Label>
                             <Input type="text" id="username" placeholder="moji" {...register("username")}/> {
-                            errors.username && (<p className="text-destructive text-sm"> {
+                            errors.username && (<p className="error-message"> {
                                 errors.username.message
                             } </p>)
                         } </div>
@@ -77,7 +77,7 @@ export function SignInForm({
                                 Mật khẩu
                             </Label>
                             <Input type="password" id="password" {...register("password")}/> {
-                            errors.password && (<p className="text-destructive text-sm"> {
+                            errors.password && (<p className="error-message"> {
                                 errors.password.message
                             } </p>)
                         } </div>

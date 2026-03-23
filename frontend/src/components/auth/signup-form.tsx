@@ -77,7 +77,7 @@ export function SignupForm({
                                     Họ
                                 </Label>
                                 <Input type="text" id="lastname" {...register("lastname")}/> {
-                                errors.lastname && (<p className="text-destructive text-sm"> {
+                                errors.lastname && (<p className="error-message"> {
                                     errors.lastname.message
                                 } </p>)
                             } </div>
@@ -86,7 +86,7 @@ export function SignupForm({
                                     Tên
                                 </Label>
                                 <Input type="text" id="firstname" {...register("firstname")}/> {
-                                errors.firstname && (<p className="text-destructive text-sm"> {
+                                errors.firstname && (<p className="error-message"> {
                                     errors.firstname.message
                                 } </p>)
                             } </div>
@@ -98,7 +98,7 @@ export function SignupForm({
                                 Tên đăng nhập
                             </Label>
                             <Input type="text" id="username" placeholder="moji" {...register("username")}/> {
-                            errors.username && (<p className="text-destructive text-sm"> {
+                            errors.username && (<p className="error-message"> {
                                 errors.username.message
                             } </p>)
                         } </div>
@@ -109,7 +109,7 @@ export function SignupForm({
                                 Email
                             </Label>
                             <Input type="email" id="email" placeholder="m@gmail.com" {...register("email")}/> {
-                            errors.email && (<p className="text-destructive text-sm"> {
+                            errors.email && (<p className="error-message"> {
                                 errors.email.message
                             }</p>)
                         } </div>
@@ -120,7 +120,7 @@ export function SignupForm({
                                 Mật khẩu
                             </Label>
                             <Input type="password" id="password" {...register("password")}/> {
-                            errors.password && (<p className="text-destructive text-sm"> {
+                            errors.password && (<p className="error-message"> {
                                 errors.password.message
                             } </p>)
                         } </div>
