@@ -129,7 +129,7 @@ export const getAllFriends = async (req, res) => {
                     userB: userId
                 }
             ]
-        }).populate("userA", "_id displayName avatarUrl").populate("userB", "_id displayName avatarUrl").lean();
+        }).populate("userA", "_id displayName avatarUrl").populate("userB", "_id displayName avatarUrl username").lean();
 
         if (! friendShips) {
             return res.status(200).json({friends: []})
@@ -148,7 +148,7 @@ export const getAllFriendRequests = async (req, res) => {
     try {
       const userId = req.user._id;
 
-      const populateFields = '_id username displayName avatarUrl'
+      const populateFields = '_id username displayName avatarUrl username'
 
       const [sent, received] = await Promise.all([
         FriendRequest.find({from: userId}).populate("to", populateFields),

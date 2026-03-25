@@ -1,0 +1,38 @@
+{
+  "semi": true,
+  "singleQuote": true,
+  "tabWidth": 2,
+  "printWidth": 80,
+  "trailingComma": "es5"
+}
+```
+
+---
+
+### Bước 6: Test thử
+
+1. Mở một file `.dart` → gõ code lộn xộn → `Ctrl+S` → code tự format
+2. Mở một file `.cs` → tương tự
+3. Mở một file `.js` → tương tự
+
+Nếu **không tự format**, nhấn `Ctrl+Shift+P` → gõ `Format Document With...` → chọn đúng formatter cho ngôn ngữ đó.
+
+---
+
+### Troubleshooting thường gặp
+
+**Lỗi: "Formatter not found"**
+```
+→ Kiểm tra extension đã cài chưa (Bước 1)
+→ Reload Cursor: Ctrl+Shift+P → "Reload Window"
+```
+
+**Lỗi: Có 2 formatter xung đột**
+```
+→ Ctrl+Shift+P → "Format Document With..." → chọn đúng cái muốn dùng
+→ Sau đó Cursor sẽ nhớ lựa chọn đó
+```
+
+**Dart không format:**
+```
+→ Đảm bảo mở đúng Flutter project folder (có pubspec.yaml ở root)

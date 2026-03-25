@@ -2,6 +2,8 @@ import * as React from "react"
 import {
   Moon,
   Sun,
+  UserPlus,
+  Users,
 } from "lucide-react"
 
 import {
@@ -68,9 +70,17 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             Nhom Chat
           </SidebarGroupLabel>
           
-          <SidebarGroupAction title="Tao nhom" className="cursor-pointer">
-            <NewGroupChatModal />
-          </SidebarGroupAction>
+          <NewGroupChatModal
+            trigger={
+              <SidebarGroupAction
+                title="Tao nhom"
+                className="cursor-pointer"
+              >
+                <Users className="size-4" />
+                <span className="sr-only">Tao nhom</span>
+              </SidebarGroupAction>
+            }
+          />
 
           <SidebarGroupContent>
             <GroupChatList />
@@ -83,9 +93,17 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             Ban be
           </SidebarGroupLabel>
           
-          <SidebarGroupAction title="Ket Ban" className="cursor-pointer">
-            <AddFriendModal />
-          </SidebarGroupAction>
+          <AddFriendModal
+            trigger={
+              <SidebarGroupAction
+                title="Ket Ban"
+                className="cursor-pointer"
+              >
+                <UserPlus className="size-4" />
+                <span className="sr-only">Ket ban</span>
+              </SidebarGroupAction>
+            }
+          />
 
           <SidebarGroupContent>
             <DirectMessageList />

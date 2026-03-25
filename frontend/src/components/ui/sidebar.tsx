@@ -412,15 +412,15 @@ function SidebarGroupLabel({
   )
 }
 
-function SidebarGroupAction({
-  className,
-  asChild = false,
-  ...props
-}: React.ComponentProps<"button"> & { asChild?: boolean }) {
+const SidebarGroupAction = React.forwardRef<
+  HTMLButtonElement,
+  React.ComponentProps<"button"> & { asChild?: boolean }
+>(({ className, asChild = false, ...props }, ref) => {
   const Comp = asChild ? Slot.Root : "button"
 
   return (
     <Comp
+      ref={ref}
       data-slot="sidebar-group-action"
       data-sidebar="group-action"
       className={cn(
@@ -433,7 +433,8 @@ function SidebarGroupAction({
       {...props}
     />
   )
-}
+})
+SidebarGroupAction.displayName = "SidebarGroupAction"
 
 function SidebarGroupContent({
   className,

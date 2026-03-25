@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "../ui/dialog";
 import { UserPlus } from "lucide-react";
@@ -5,14 +6,19 @@ import type { User } from "@/types/user";
 import { useFriendStore } from "@/stores/useFriendStore";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import SearchForm from "../AddFriendModel/SearchForm";
-import SendFriendRequestForm from "../AddFriendModel/SendFriendRequestForm";
+import SearchForm from "../addFriendModel/SearchForm";
+import SendFriendRequestForm from "../addFriendModel/SendFriendRequestForm";
 
 export interface IFormValues {
   username: string;
   message: string;
 }
-const AddFriendModal = () => {
+
+type AddFriendModalProps = {
+  trigger?: ReactNode;
+};
+
+const AddFriendModal = ({ trigger }: AddFriendModalProps) => {
   const [isFound, setIsFound] = useState<boolean | null>(null);
   const [searchUser, setSearchUser] = useState<User>();
   const [searchedUsername, setSearchedUsername] = useState<string>("");
@@ -71,10 +77,22 @@ const AddFriendModal = () => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <div className="flex justify-center items-center size-5 rounded-full hover:bg-sidebar-accent cursor-pointer z-10">
-          <UserPlus className="size-4"></UserPlus>
-          <span className="sr-only">Ket ban</span>
-        </div>
+        {trigger ?? (
+          <div
+            role="button"
+            tabIndex={0}
+            className="flex justify-center items-center size-5 rounded-full hover:bg-sidebar-accent cursor-pointer z-10"
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                e.currentTarget.click();
+              }
+            }}
+          >
+            <UserPlus className="size-4"></UserPlus>
+            <span className="sr-only">Ket ban</span>
+          </div>
+        )}
       </DialogTrigger>
 
       <DialogContent className="sm:max-w-[425px] border-none">
